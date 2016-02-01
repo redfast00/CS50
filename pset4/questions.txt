@@ -1,0 +1,35 @@
+0.  BMP: varies (see the number of bits per pixel at offset 0x1C in the header)
+         maximum is 2 ^ 32 
+    GIF: palette of 256 different colors per frame, chosen from 2 ^ 24 colors + transparent
+    JPEG: 2 ^ 24 different colors
+    PNG: up to 2 ^ 48 different colors + alpha channel
+1.  GIF
+2.  Lossy: some information is lost in compression, so the original image can't be reconstructed
+    Lossless: no information gets lost in compression or there is no compression
+3.  JPEG and GIF
+4.  The list of disk clusters the file occupies will be removed from the File Allocation Table
+    (This doesn't mean the file is actually deleted, only the pointer to the file is deleted)
+5.  - Overwrite the file with zero's or random bytes. (This only works well on a HDD)
+    - Send the command to wipe the encryption key on a self-encrypting drive.
+    - Destroy the drive (for example: hit it with a hammer, degauss it, )
+6.  `stdint.h` is a header that provides fixed width integer types.
+7.  You will be sure that no matter what platorm you compile/run it on, 
+    the variable will always have a fixed number of bits.
+8.  BYTE: 1 byte
+    DWORD: 4 bytes
+    LONG: 4 bytes
+    WORD: 2 bytes
+9.  42 4D
+10. `bfSize` contains info about the type, size, and layout of a device-independant bitmap.
+    `biSize` contains info about the dimensions and color format of a device-independant bitmap.
+11. The bitmap is a top-down device-independant bitmap and its origin is the upper-left corner.
+12. `biBitCount`
+13. We don't have write permission to `outfile`. For example: 
+    `./copy smiley /etc/shadow` and we aren't root.
+14. This argument is the number of elements we want to read. Since we want 
+    to read one element at a time, this argument is here always equal to 1.
+15. `padding` will be 1.
+16. `fseek` sets the position indicator. This allows you to go back or forward
+    in a file.
+17. `SEEK_CUR` is a constant that refers to the current position of the position indicator.
+18. Rick Astley (Thanks for rickrolling me again...)

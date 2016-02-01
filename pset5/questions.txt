@@ -1,0 +1,66 @@
+0.  A really long word
+    (http://lmgtfy.com/?q=pneumonoultramicroscopicsilicovolcanoconiosis)
+
+1.  getrusage - get resource usage
+
+2.  16
+
+3.  If you pass `before` and `after` by value, the computer would have to copy 
+    the entire structure and that would have a negative impact on performance.
+    If you pass `before` and `after` by reference, the computer only has to copy
+    the pointers to `before` and `after`.
+
+4.  Every time we pass the for loop, we read one character and store it in `c`.
+    If `c` is the end-of-file character, we are at the end of the file and continue after the loop.
+    
+    We then check if `c` is an alphabetical character or `c` is an apostrophe 
+    and index is bigger then 0. (This means that we only accept apostrophes if 
+    they aren't at the beginning of the word)
+    
+    If so, we append the character to `word` and bump `index` up.
+    Now, we check if `index` is bigger then the maximum length of a word. If so,
+    we "eat the rest of the word" (progress the filepointer until we encounter a 
+    character that isn't alphanumeric or an EOF character) and prepare for a 
+    new word by setting `index` to 0.
+    
+    If `c` isn't an alphabetical character or an apostrophe somewhere else than
+    the beginning of the word, we check if `c` is a number.
+    
+    If so, we "eat the rest of the word" and prepare for a new word.
+    
+    If `c` isn't a number, we assume that we found a whole word, terminate 
+    `word` with a null character, increase the number of words in text by one 
+    and note the time in `before`. We then check if `word` is misspelled, 
+    store the result of the check in `misspelled` and note the time in `after`. 
+    
+    We then increase the time by however long the timer ran. If `misspelled` 
+    (the word is misspelled), we print the word and increase the number of 
+    misspellings by one. After that, we prepare for the next word by resetting 
+    `index` to 0.
+
+5.  If you read lines with scanf, you might pass a string with numbers to
+    `check()`.
+
+6.  To make sure the students can't modify the parameters since speller.c still 
+    uses the parameters after the calls to `check` and `load`.
+    For example: I tried to lowercase all characters in `word` before passing 
+    it to my `hash()` function. If the parameters weren't declared as `const`, 
+    the misspelled words wouldn't be capitalized correctly.
+
+7.  I used a hashtable of linked lists. Every node of my linked list contained a
+    pointer to the next node and a pointer to a word from the dictionary.
+
+8.  At first my code spent 200 seconds in check when 
+    checking `texts/holmes.txt`, all other times were under a second.
+
+9.  This was easily fixed by upping the number of "buckets" in my hashtable 
+    from 26 to 65536, and my code ran the same text in 0.60 seconds.
+    On average, my code ran about as fast as the staff's solution.
+
+10. I don't think there are a lot of bottlenecks left (checked with callgrind).
+    There is still room for improvement: 
+    - `BUCKETS` (the number of buckets in the hashtable) shouldn't be hardcoded 
+       and should probably depend on the number of lines in the dictionary 
+       (time vs memory tradeoff).
+    - The first nodes in the hashmap (the ones the static hashmap array is made 
+      from in the beginning of dictionary.c) aren't used.
